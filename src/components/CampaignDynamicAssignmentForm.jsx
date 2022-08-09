@@ -59,20 +59,22 @@ class CampaignDynamicAssignmentForm extends React.Component {
       .map(p => ({ id: p, name: p }));
     return (
       <div>
-        <FormControlLabel
-          control={
-            <Switch
-              color="primary"
-              checked={useDynamicAssignment || false}
-              onChange={(toggler, val) => {
-                console.log(toggler, val);
-                this.toggleChange("useDynamicAssignment", val);
-              }}
-            />
-          }
-          label="Allow texters with a link to join and start texting when the campaign is started?"
-          labelPlacement="start"
-        />
+        {!global.HIDE_MANUAL_ASSIGNMENT && (
+          <FormControlLabel
+            control={
+              <Switch
+                color="primary"
+                checked={useDynamicAssignment || false}
+                onChange={(toggler, val) => {
+                  console.log(toggler, val);
+                  this.toggleChange("useDynamicAssignment", val);
+                }}
+              />
+            }
+            label="Allow texters with a link to join and start texting when the campaign is started?"
+            labelPlacement="start"
+          />
+        )}
         <GSForm
           schema={this.formSchema}
           value={this.state}
@@ -92,10 +94,12 @@ class CampaignDynamicAssignmentForm extends React.Component {
                     "Please save the campaign and reload the page to get the join link to share with texters."
                   )}
                 </li>
-                <li>
-                  You can turn off dynamic assignment after starting a campaign
-                  to disallow more new texters to join
-                </li>
+                {!global.HIDE_MANUAL_ASSIGNMENT && (
+                  <li>
+                    You can turn off dynamic assignment after starting a
+                    campaign to disallow more new texters to join
+                  </li>
+                )}
               </ul>
               <p>
                 Batch sizes are how many texts someone should send before they

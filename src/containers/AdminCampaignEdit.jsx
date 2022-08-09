@@ -42,6 +42,7 @@ import CampaignTextingHoursForm from "../components/CampaignTextingHoursForm";
 import { styles } from "./AdminCampaignStats";
 import AdminScriptImport from "../containers/AdminScriptImport";
 import { makeTree } from "../lib";
+import identity from "lodash/identity";
 
 const campaignInfoFragment = `
   id
@@ -448,7 +449,7 @@ export class AdminCampaignEditBase extends React.Component {
             : {})
         }
       },
-      {
+      !global.HIDE_MANUAL_ASSIGNMENT && {
         title: "Texters",
         content: CampaignTextersForm,
         keys: ["texters", "contactsCount"],
@@ -664,7 +665,7 @@ export class AdminCampaignEditBase extends React.Component {
         doNotSaveAfterSubmit: true
       });
     }
-    return finalSections;
+    return finalSections.filter(identity);
   }
 
   sectionSaveStatus(section) {

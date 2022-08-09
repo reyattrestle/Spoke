@@ -75,7 +75,8 @@ export class AdminCampaignList extends React.Component {
       interactionSteps: {
         script: "",
         id: "new"
-      }
+      },
+      useDynamicAssignment: global.HIDE_MANUAL_ASSIGNMENT
     });
 
     if (newCampaign.errors) {

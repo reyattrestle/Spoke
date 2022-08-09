@@ -134,6 +134,13 @@ export default function renderIndex(html, css, assetMap) {
       window.ASSIGNMENT_CONTACTS_SIDEBAR=${getConfig(
         "ASSIGNMENT_CONTACTS_SIDEBAR"
       )}
+      window.HIDE_MANUAL_ASSIGNMENT=${getConfig(
+        "HIDE_MANUAL_ASSIGNMENT",
+        null,
+        {
+          truthy: 1
+        }
+      ) || false};
     </script>
     <script src="${assetMap["bundle.js"]}"></script>
   </body>
